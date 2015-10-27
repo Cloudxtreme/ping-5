@@ -58,6 +58,14 @@ func Add(scheme string, function func(url *url.URL) error) error {
 	return nil
 }
 
+func PingRawUrl(rawurl string) error {
+	u, err := url.Parse(rawurl)
+	if err != nil {
+		return e.New(err)
+	}
+	return e.Forward(Ping(u))
+}
+
 func Ping(url *url.URL) error {
 	f, ok := register[url.Scheme]
 	if !ok {

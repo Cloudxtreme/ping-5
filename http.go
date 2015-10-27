@@ -9,9 +9,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"monitor/status"
-
 	"github.com/fcavani/e"
+	"github.com/fcavani/log"
 )
 
 // PingHttp connect a http or https server and try to
@@ -32,7 +31,8 @@ func PingHttp(url *url.URL) error {
 			return e.Forward(err)
 		}
 		buf = buf[:n]
-		status.Log(status.Protocol, "PingHttp status code is %v and received it from server: %v", resp.StatusCode, string(buf))
+		//status.Log(status.Protocol, "PingHttp status code is %v and received it from server: %v", resp.StatusCode, string(buf))
+		log.ProtoLevel().Printf("PingHttp status code is %v and received it from server: %v", resp.StatusCode, string(buf))
 		return e.New("returned status code %v, expected 2xx", resp.StatusCode)
 	}
 	_, err = resp.Body.Read(buf)
