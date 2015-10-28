@@ -5,23 +5,19 @@
 package ping
 
 import (
-	"net/url"
 	"testing"
 
 	"github.com/fcavani/e"
 )
 
-const CouchUrl = "couch://localhost:5984"
+const mysqlUrl = "mysql://root@@tcp(127.0.0.1:3306)/db"
 
-func TestPingCouch(t *testing.T) {
+func TestMySql(t *testing.T) {
 	if !OnTravis() {
 		t.Skip("not on travis")
 	}
-	url, err := url.Parse(CouchUrl)
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = PingCouch(url)
+	url := testParse(t, mysqlUrl)
+	err := PingMySql(url)
 	if err != nil {
 		t.Fatal(e.Trace(e.Forward(err)))
 	}

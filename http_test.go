@@ -5,23 +5,16 @@
 package ping
 
 import (
-	"net/url"
 	"testing"
 
 	"github.com/fcavani/e"
 )
 
-const CouchUrl = "couch://localhost:5984"
+const httpUrl = "https://www.google.com"
 
-func TestPingCouch(t *testing.T) {
-	if !OnTravis() {
-		t.Skip("not on travis")
-	}
-	url, err := url.Parse(CouchUrl)
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = PingCouch(url)
+func TestHttp(t *testing.T) {
+	url := testParse(t, httpUrl)
+	err := PingHttp(url)
 	if err != nil {
 		t.Fatal(e.Trace(e.Forward(err)))
 	}

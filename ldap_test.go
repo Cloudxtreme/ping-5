@@ -5,24 +5,21 @@
 package ping
 
 import (
-	"net/url"
 	"testing"
 
 	"github.com/fcavani/e"
 )
 
-const CouchUrl = "couch://localhost:5984"
+const ldapUrl = "ldap://user:pass@localhost/ou=People,dc=isp,dc=net"
 
-func TestPingCouch(t *testing.T) {
-	if !OnTravis() {
-		t.Skip("not on travis")
-	}
-	url, err := url.Parse(CouchUrl)
+func TestLdap(t *testing.T) {
+	url := testParse(t, ldapUrl)
+	err := PingLdap(url)
 	if err != nil {
-		t.Fatal(err)
+		t.Log(e.Trace(e.Forward(err)))
 	}
-	err = PingCouch(url)
+	err = PingLdapTLS(url)
 	if err != nil {
-		t.Fatal(e.Trace(e.Forward(err)))
+		t.Log(e.Trace(e.Forward(err)))
 	}
 }

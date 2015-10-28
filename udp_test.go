@@ -5,23 +5,16 @@
 package ping
 
 import (
-	"net/url"
 	"testing"
 
 	"github.com/fcavani/e"
 )
 
-const CouchUrl = "couch://localhost:5984"
+const udpUrl = "udp://8.8.8.8:53"
 
-func TestPingCouch(t *testing.T) {
-	if !OnTravis() {
-		t.Skip("not on travis")
-	}
-	url, err := url.Parse(CouchUrl)
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = PingCouch(url)
+func TestUdp(t *testing.T) {
+	url := testParse(t, udpUrl)
+	err := PingUDP(url)
 	if err != nil {
 		t.Fatal(e.Trace(e.Forward(err)))
 	}
