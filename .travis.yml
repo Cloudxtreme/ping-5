@@ -4,6 +4,7 @@ go:
  - tip
 services:
  - couchdb
+ - mysql
 matrix:
   allow_failures:
     - go: tip
