@@ -1,10 +1,11 @@
 language: go
-go: 
+go:
  - release
  - tip
-
-script:
- - go test -v -timeout=15s ./...
- 
 services:
  - couchdb
+matrix:
+  allow_failures:
+    - go: tip
+script:
+ - go test -v -timeout=15s ./...
