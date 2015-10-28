@@ -5,8 +5,9 @@ go:
 services:
  - couchdb
  - mysql
+ - mongodb
 matrix:
   allow_failures:
     - go: tip
 script:
- - go test -v -timeout=15s ./...
+ - go test -v -timeout=120s ./...
