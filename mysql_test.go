@@ -10,7 +10,7 @@ import (
 	"github.com/fcavani/e"
 )
 
-const mysqlUrl = "mysql://root@@tcp(127.0.0.1:3306)/db"
+const mysqlUrl = "mysql://root@tcp(127.0.0.1:3306)/db"
 
 func TestMySql(t *testing.T) {
 	if !OnTravis() {
