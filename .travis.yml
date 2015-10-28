@@ -9,5 +9,7 @@ services:
 matrix:
   allow_failures:
     - go: tip
+before_script:
+  - mysql -e 'create database db;'
 script:
  - go test -v -timeout=120s ./...
