@@ -19,7 +19,7 @@ import (
 
 func init() {
 	outer := log.Log.Store().(log.OuterLogger)
-	w := outer.OuterLog("imap", log.DebugPrio)
+	w := outer.OuterLog(log.DebugPrio, "imap")
 	imap.DefaultLogger = golog.New(w, "", 0)
 	imap.DefaultLogMask = imap.LogNone
 }
