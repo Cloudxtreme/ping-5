@@ -156,7 +156,7 @@ func getInst(etc *etcd, path string) (*Instance, error) {
 
 // PingGormethodsEtcd uses etcd to retrieve the session and instance names.
 // Url format: gormethods+etc://id:pass@etcd_endpoint/path/to/etcd/data
-// The data must be in the format of Instace struct.
+// The data must be in the format of Instace struct and stored as yaml.
 // To cryptograph the data set the variable EtcdSecRing to the location of the
 // pgp key.
 func PingGormethodsEtcd(u *url.URL) error {
@@ -176,4 +176,5 @@ func PingGormethodsEtcd(u *url.URL) error {
 
 func init() {
 	Add("gormethods", PingGormethods)
+	Add("gormethods+etcd", PingGormethodsEtcd)
 }
